@@ -7,5 +7,6 @@ public class HomeButton : MonoBehaviour
     public void OnButtonClick()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        CalibrationController.SendBluetoothData("r");
     }
 }

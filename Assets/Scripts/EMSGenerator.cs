@@ -32,7 +32,14 @@ public class EMSGenerator : MonoBehaviour
         else if (ModeManager.currentMode == ModeManager.GameMode.FreePlay)
         {
             ModeManager.playList = string.Empty;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 50; i++)
+            {
+                ModeManager.playList += Random.Range(0, 3).ToString();
+            }
+        }
+        else if (ModeManager.currentMode == ModeManager.GameMode.Walk)
+        {
+            for (int i = 0; i < 50; i++)
             {
                 ModeManager.playList += Random.Range(0, 3).ToString();
             }

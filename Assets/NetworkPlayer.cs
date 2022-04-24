@@ -64,5 +64,4 @@ public class NetworkPlayer : MonoBehaviourPunCallbacks, IPunObservable
         }
         playerActions = null;
     }
-
 }

@@ -2,8 +2,9 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public static string filePrefix;
     public static string playerName;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject warningPanel;
     public float buzzerTime = 1800;
     private bool activated;
+    private int playerCount;
 
     public static GameManager Instance;
 
@@ -50,6 +52,14 @@ public class GameManager : MonoBehaviour
             warningPanel.SetActive(true);
             activated = true;
         }
+
+        if (PhotonNetwork.CurrentRoom == null) return;
+        if (PhotonNetwork.CurrentRoom.PlayerCount < playerCount)
+        {
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene(0);
+        }
+        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
     public void SendBluetoothDataToPlayer(List<Player> player, string data)
@@ -76,5 +86,10 @@ public class GameManager : MonoBehaviour
 #else
         BluetoothManager.helper.SendData(data);
 #endif
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        SendBluetoothData("r");
     }
 }

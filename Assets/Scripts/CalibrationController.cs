@@ -28,7 +28,7 @@ public class CalibrationController : MonoBehaviour
     {
         foreach (var gm in toggles)
         {
-            gm.isOn = false;
+            gm.SetIsOnWithoutNotify(false);
         }
     }
 
@@ -38,7 +38,7 @@ public class CalibrationController : MonoBehaviour
         ResetAll();
     }
 
-    private void SendBluetoothData(string data)
+    public static void SendBluetoothData(string data)
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
             GameManager.Instance.SendBluetoothDataToPlayer(GameManager.ControledPlayer, data);

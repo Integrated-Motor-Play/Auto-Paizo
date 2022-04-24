@@ -9,6 +9,7 @@ public class ModeManager : MonoBehaviour
         Bestof3 = 0,
         Bestof5 = 1,
         FreePlay = 2,
+        Walk = 3,
 
     }
     public static GameMode currentMode = GameMode.FreePlay;

@@ -23,7 +23,8 @@ public class HotHandsController : MonoBehaviour
     public AudioClip start0;
     public float preMoveTime = 0.5f;
 
-    public int maxPrecount = 3;
+    public int normalMax = 3;
+    private int maxPrecount;
 
     bool preTrigger;
     int precount;
@@ -45,6 +46,22 @@ public class HotHandsController : MonoBehaviour
         sensText.text = ((float)sensSlider.value / sensSlider.maxValue).ToString("f2");
     }
 
+    private void OnEnable()
+    {
+        maxPrecount = normalMax;
+        SetWalkPrecount();
+    }
+
+    private void SetWalkPrecount()
+    {
+        if (ModeManager.currentMode == ModeManager.GameMode.Walk)
+        {
+            var numbers = new int[3] { 2, 5, 8 };
+            var randomIndex = Random.Range(0, 3);
+            maxPrecount = numbers[randomIndex];
+            print("maxPrecount: " + maxPrecount);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -89,6 +106,7 @@ public class HotHandsController : MonoBehaviour
                 audioSource.Play();
                 SendBluetoothData(GetChar(ModeManager.playList[listIndex], true));
                 Invoke(nameof(EMSOff), EMSTime);
+                SetWalkPrecount();
             }
             //print(acc);
             SetEMSResultText();

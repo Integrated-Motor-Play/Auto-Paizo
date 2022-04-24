@@ -11,6 +11,8 @@ public class LogOut : MonoBehaviour
         PlayerPrefs.SetString("PlayerName", string.Empty);
         PhotonNetwork.Disconnect();
         Destroy(FindObjectOfType<BluetoothManager>().gameObject);
+        Destroy(FindObjectOfType<PlayerManager>().gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
+        print("Logged out");
     }
 }
