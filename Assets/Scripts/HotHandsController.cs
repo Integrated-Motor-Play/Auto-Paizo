@@ -104,7 +104,7 @@ public class HotHandsController : MonoBehaviour
             {
                 audioSource.clip = (listIndex == ModeManager.playList.Length - 1) ? start : start0;
                 audioSource.Play();
-                SendBluetoothData(GetChar(ModeManager.playList[listIndex], true));
+                CalibrationController.SendBluetoothData(GetChar(ModeManager.playList[listIndex], true));
                 Invoke(nameof(EMSOff), EMSTime);
                 SetWalkPrecount();
             }
@@ -141,7 +141,7 @@ public class HotHandsController : MonoBehaviour
     private void EMSOff()
     {
         if (listIndex > 0)
-            SendBluetoothData(GetChar(ModeManager.playList[listIndex - 1], false));
+            CalibrationController.SendBluetoothData(GetChar(ModeManager.playList[listIndex - 1], false));
         triggered = false;
         accText.text = "";
     }
@@ -186,18 +186,9 @@ public class HotHandsController : MonoBehaviour
 
     private IEnumerator PreMove(float time)
     {
-        SendBluetoothData("D");
+        CalibrationController.SendBluetoothData("D");
         yield return new WaitForSeconds(time);
-        SendBluetoothData("d");
-    }
-
-    private void SendBluetoothData(string data)
-    {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
-            GameManager.Instance.SendBluetoothDataToPlayer(GameManager.ControledPlayer, data);
-        else
-            GameManager.SendBluetoothData(data);
-        print(data);
+        CalibrationController.SendBluetoothData("d");
     }
 
     private void EnableGamePanel()
@@ -222,7 +213,7 @@ public class HotHandsController : MonoBehaviour
 
     private void OnDisable()
     {
-        SendBluetoothData("r");
+        CalibrationController.SendBluetoothData("r");
     }
 
     private void SetEMSResultText()

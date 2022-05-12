@@ -40,10 +40,18 @@ public class CalibrationController : MonoBehaviour
 
     public static void SendBluetoothData(string data)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
-            GameManager.Instance.SendBluetoothDataToPlayer(GameManager.ControledPlayer, data);
+        if (GameManager.networkMode == GameManager.NetworkMode.online)
+        {
+            if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+                GameManager.Instance.SendBluetoothDataToPlayer(GameManager.ControledPlayer, data);
+            else
+                GameManager.SendBluetoothData(data);
+            print(data);
+        }
         else
+        {
             GameManager.SendBluetoothData(data);
-        print(data);
+        }
     }
 }
+

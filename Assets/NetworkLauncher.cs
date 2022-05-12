@@ -27,7 +27,7 @@ public class NetworkLauncher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        Connect();
+
     }
 
     public void CreateRoom()
@@ -41,8 +41,14 @@ public class NetworkLauncher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(JoinRoomName.text);
     }
 
+    public void SetOffline()
+    {
+        GameManager.networkMode = GameManager.NetworkMode.offline;
+    }
+
     public void Connect()
     {
+        GameManager.networkMode = GameManager.NetworkMode.online;
         ConnectMessage.text = "Connecting...";
         // #Critical, we must first and foremost connect to Photon Online Server.
         PhotonNetwork.ConnectUsingSettings();

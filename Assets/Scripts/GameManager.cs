@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static string filePrefix;
     public static string playerName;
     public static GameMode currentMode;
+    public static NetworkMode networkMode;
     public static List<Player> ControledPlayer = new List<Player>();
     public enum GameMode
     {
@@ -18,10 +19,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         TwentyOne,
     }
 
+    public enum NetworkMode
+    {
+        offline,
+        online
+    }
+
     public GameObject warningPanel;
     public float buzzerTime = 1800;
     private bool activated;
-    private int playerCount;
+    //private int playerCount;
 
     public static GameManager Instance;
 
@@ -53,13 +60,13 @@ public class GameManager : MonoBehaviourPunCallbacks
             activated = true;
         }
 
-        if (PhotonNetwork.CurrentRoom == null) return;
-        if (PhotonNetwork.CurrentRoom.PlayerCount < playerCount)
-        {
-            PhotonNetwork.Disconnect();
-            SceneManager.LoadScene(0);
-        }
-        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+        //if (PhotonNetwork.CurrentRoom == null) return;
+        //if (PhotonNetwork.CurrentRoom.PlayerCount < playerCount)
+        //{
+        //    PhotonNetwork.Disconnect();
+        //   SceneManager.LoadScene(0);
+        //}
+        //playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
     public void SendBluetoothDataToPlayer(List<Player> player, string data)
