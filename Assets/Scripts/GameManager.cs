@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using ArduinoBluetoothAPI;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -87,12 +88,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public static void SendBluetoothData(string data)
     {
-#if UNITY_EDITOR
-        print("Sended Bluetooth Message: " + data);
-
-#else
-        BluetoothManager.helper.SendData(data);
-#endif
+        BluetoothManager.Instance.SentBlutoothData(data);
     }
 
     public override void OnDisconnected(DisconnectCause cause)

@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using ArduinoBluetoothAPI;
 using System;
@@ -17,6 +18,7 @@ public class BluetoothManager : MonoBehaviour
     private bool connected = true;
 
     private static BluetoothManager _instance;
+    private BluetoothHelperCharacteristic characteristic;
     public static BluetoothManager Instance
     {
         get
@@ -43,7 +45,7 @@ public class BluetoothManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-        void Start()
+    void Start()
     {
         data = "";
         tmp = "";
@@ -80,7 +82,40 @@ public class BluetoothManager : MonoBehaviour
     void OnConnected(BluetoothHelper helper)
     {
         isConnecting = false;
-        helper.StartListening();
+        //helper.StartListening();
+
+        var service = new BluetoothHelperService("19B10000-E8F2-537E-4F6C-D104768A1214");
+        characteristic = new BluetoothHelperCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214");
+        service.addCharacteristic(characteristic);
+        helper.Subscribe(service);
+
+        SentBlutoothData("r");
+        //helper.Subscribe((new BluetoothHelperCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214")));
+    }
+
+    //IEnumerator TestOnly()
+    //{
+    //    while (true)
+    //    {
+    //        SendDataToCharacteristic("r");
+     //       yield return new WaitForSeconds(1);
+     //   }
+    //}
+
+    public void SentBlutoothData(string d)
+    {
+#if UNITY_EDITOR
+        print("Sended Bluetooth Message: " + d);
+
+#else
+        //helper.SendData(d);
+        SendDataToCharacteristic(d);
+#endif
+    }
+
+    public void SendDataToCharacteristic(string data)
+    {
+        helper.WriteCharacteristic(characteristic, data);
     }
 
     void OnConnectionFailed(BluetoothHelper helper)
