@@ -82,12 +82,18 @@ public class BluetoothManager : MonoBehaviour
     void OnConnected(BluetoothHelper helper)
     {
         isConnecting = false;
-        //helper.StartListening();
 
-        var service = new BluetoothHelperService("19B10000-E8F2-537E-4F6C-D104768A1214");
-        characteristic = new BluetoothHelperCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214");
-        service.addCharacteristic(characteristic);
-        helper.Subscribe(service);
+        if (GameManager.CurrentDevice == GameManager.Device.Seeeduino)
+        {
+            var service = new BluetoothHelperService("19B10000-E8F2-537E-4F6C-D104768A1214");
+            characteristic = new BluetoothHelperCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214");
+            service.addCharacteristic(characteristic);
+            helper.Subscribe(service);
+        }
+        else
+        {
+            helper.StartListening();
+        }
 
         SentBlutoothData("r");
         //helper.Subscribe((new BluetoothHelperCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214")));
@@ -98,18 +104,20 @@ public class BluetoothManager : MonoBehaviour
     //    while (true)
     //    {
     //        SendDataToCharacteristic("r");
-     //       yield return new WaitForSeconds(1);
-     //   }
+    //       yield return new WaitForSeconds(1);
+    //   }
     //}
 
     public void SentBlutoothData(string d)
     {
 #if UNITY_EDITOR
         print("Sended Bluetooth Message: " + d);
-
 #else
         //helper.SendData(d);
-        SendDataToCharacteristic(d);
+        if (GameManager.CurrentDevice == GameManager.Device.Seeeduino)
+            SendDataToCharacteristic(d);
+        else
+            helper.SendData(d);
 #endif
     }
 

@@ -10,7 +10,7 @@ public class ModeManager : MonoBehaviour
         Bestof5 = 1,
         FreePlay = 2,
         Walk = 3,
-
+        InfiniteLoop = 4
     }
     public static GameMode currentMode = GameMode.FreePlay;
     public static string playList;

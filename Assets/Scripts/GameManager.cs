@@ -12,12 +12,19 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameMode currentMode;
     public static NetworkMode networkMode;
     public static List<Player> ControledPlayer = new List<Player>();
+    public static Device CurrentDevice;
     public enum GameMode
     {
         HotHands,
         OddsAndEvens,
         RockPaperScissors,
         TwentyOne,
+    }
+
+    public enum Device
+    {
+        Seeeduino,
+        Adafruit,
     }
 
     public enum NetworkMode

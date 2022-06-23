@@ -107,6 +107,10 @@ public class HotHandsController : MonoBehaviour
                 CalibrationController.SendBluetoothData(GetChar(ModeManager.playList[listIndex], true));
                 Invoke(nameof(EMSOff), EMSTime);
                 SetWalkPrecount();
+                if (ModeManager.currentMode == ModeManager.GameMode.InfiniteLoop)
+                {
+                    StartCoroutine(InfiniteLoop());
+                }
             }
             //print(acc);
             SetEMSResultText();
@@ -258,5 +262,33 @@ public class HotHandsController : MonoBehaviour
                     return;
             }
         }
+    }
+
+    IEnumerator InfiniteLoop()
+    {
+        int thisPlay = 0;
+        while (true)
+        {
+            GameManager.SendBluetoothData(GetChar(ModeManager.playList[thisPlay], true));
+            if (thisPlay > 0)
+            {
+                var dataOff = GetChar(ModeManager.playList[thisPlay - 1], false);
+                CalibrationController.SendBluetoothData(dataOff);
+                print("Sended Network Bluetooth Message: " + dataOff);
+            }
+            thisPlay++;
+            yield return new WaitForSeconds(4);
+            GameManager.SendBluetoothData(GetChar(ModeManager.playList[thisPlay - 1], false));
+            var dataOn = GetChar(ModeManager.playList[thisPlay], true);
+            CalibrationController.SendBluetoothData(dataOn);
+            print("Sended Network Bluetooth Message: " + dataOn);
+            thisPlay++;
+            yield return new WaitForSeconds(4);
+        }
+    }
+
+    private char GetNumFromIndex(int index)
+    {
+        return (index % 3).ToString()[0];
     }
 }

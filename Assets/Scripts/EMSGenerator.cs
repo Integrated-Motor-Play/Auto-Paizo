@@ -44,6 +44,13 @@ public class EMSGenerator : MonoBehaviour
                 ModeManager.playList += Random.Range(0, 3).ToString();
             }
         }
+        else if (ModeManager.currentMode == ModeManager.GameMode.InfiniteLoop)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                ModeManager.playList += Random.Range(1, 4).ToString();
+            }
+        }
 
         if (isHotHands)
         {
