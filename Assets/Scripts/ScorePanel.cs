@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using TMPro;
 
@@ -27,10 +28,10 @@ public class ScorePanel : MonoBehaviour
     private void UpdateAndGenerate()
     {
         scoreText.text = score.ToString();
-        DataRecord.GenerateCSVFile(GameManager.playerName + "_ScreenTime_" + GameManager.filePrefix, "," + which + ": " + scoreText.text + "," + Time.time);
+        DataRecord.GenerateCSVFile(GameManager.PlayerName + "_ScreenTime_" + GameManager.FilePrefix, "," + which + ": " + scoreText.text + "," + Time.time);
         ScoreManager.Instance.ScoreChanged = true;
-        if (actualScore > ModeManager.playList.Length ||
-        (ScoreManager.Instance.EMSPanel.actualScore + ScoreManager.Instance.PlayerPanel.actualScore) >= 2 * ModeManager.playList.Length)
+        if (actualScore > ModeManager.PlayList.Length ||
+        (ScoreManager.Instance.EMSPanel.actualScore + ScoreManager.Instance.PlayerPanel.actualScore) >= 2 * ModeManager.PlayList.Length)
         {
             FindObjectOfType<HotHandsController>().GameOver();
         }

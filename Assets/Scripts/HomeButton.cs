@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HomeButton : MonoBehaviour
 {
     public void OnButtonClick()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         CalibrationController.SendBluetoothData("r");
     }
 }

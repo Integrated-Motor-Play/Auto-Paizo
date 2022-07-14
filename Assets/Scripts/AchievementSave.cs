@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -16,7 +17,7 @@ public class AchievementSave : MonoBehaviour
     {
         AchievementText.text = Text;
 
-        label = GameManager.playerName + "_Achievement_" + Index.ToString();
+        label = GameManager.PlayerName + "_Achievement_" + Index.ToString();
         if (PlayerPrefs.GetInt(label, 0) == 1)
             toggle.isOn = true;
         else toggle.isOn = false;

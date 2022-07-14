@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
@@ -40,7 +41,7 @@ public class CalibrationController : MonoBehaviour
 
     public static void SendBluetoothData(string data)
     {
-        if (GameManager.networkMode == GameManager.NetworkMode.online)
+        if (GameManager.networkMode == GameManager.NetworkMode.Online)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
                 GameManager.Instance.SendBluetoothDataToPlayer(GameManager.ControledPlayer, data);

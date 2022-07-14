@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using TMPro;
 
@@ -12,15 +14,12 @@ public class TextPlayer : MonoBehaviour
         Round,
     }
     public textType TextType;
-    [TextArea]
-    public string[] text;
-
 
     private void Update()
     {
         if (TextType == textType.Game)
-            GetComponent<TextMeshProUGUI>().text = text[(int)GameManager.currentMode];
+            GetComponent<TextMeshProUGUI>().text = GameManager.CurrentMode.ModeName;
         if (TextType == textType.Round)
-            GetComponent<TextMeshProUGUI>().text = text[(int)ModeManager.currentMode];
+            GetComponent<TextMeshProUGUI>().text = ModeManager.CurrentMode.ModeName;
     }
 }

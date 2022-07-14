@@ -6,36 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EnterName.unity
-    guid: f6163c52153149d4b8016f47789e3c98
+    path: Assets/Scenes/Login 1.unity
+    guid: b6202fcb6333a0a49b96ebbd57f99634
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: c55cc65befdf5c84897ea80bd236f83e
+    path: Assets/Scenes/MainMenu 1.unity
+    guid: 8dcfd8d8fc8b20749864d134430c2b1e
   - enabled: 1
-    path: Assets/Scenes/BluetoothConnect.unity
-    guid: 7178053955275724fa36d1a58ab72025
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/HotHands.unity
-    guid: 1361f06c9871bd940b3bc27f78d89b95
-  - enabled: 0
-    path: Assets/Scenes/Others.unity
-    guid: 341be803b0cd73743b0f844157c1709f
-  - enabled: 0
-    path: Assets/BluetoothAPI/Scenes/demo.unity
-    guid: 29265e594f8b847f78e35de39aefa1f9
-  - enabled: 0
-    path: Assets/BluetoothAPI/Samples/BLE/BLE.unity
-    guid: a247264e1d3fa411eadfb3bd8e7f6df2
-  - enabled: 0
-    path: Assets/BluetoothAPI/Samples/Scan and Connect/Scan and Connect.unity
-    guid: 65f67dcd1c24d424abe8483884202f95
-  - enabled: 0
-    path: Assets/BluetoothAPI/Scenes/ble_services.unity
-    guid: 260c5ca15d52546018679e7ba3ea183b
-  - enabled: 0
-    path: Assets/BluetoothAPI/Scenes/main.unity
-    guid: 43bbdd0c42e894f48b084f211b618b56
+    path: Assets/Scenes/GamePlay 1.unity
+    guid: 17bea02cf9c7d7d448d09507bccf0982
   m_configObjects: {}

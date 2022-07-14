@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class EMSGenerator : MonoBehaviour
@@ -9,8 +10,8 @@ public class EMSGenerator : MonoBehaviour
     private string[] EMSList_3;
     private void Awake()
     {
-        isHotHands = GameManager.currentMode == GameManager.GameMode.HotHands;
-        print("Mode: " + GameManager.currentMode);
+        isHotHands = GameManager.CurrentMode.GameMode == GameManager.GameMode.SlapMeIfYouCan;
+        print("Mode: " + GameManager.CurrentMode.ModeName);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         EMSList_3 = new string[EMSList.Length];
         for (int i = 0; i < EMSList.Length; i++)
@@ -21,47 +22,47 @@ public class EMSGenerator : MonoBehaviour
 
     public void UpdatePlayList()
     {
-        if (ModeManager.currentMode == ModeManager.GameMode.Bestof3)
+        if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.BestOf3)
         {
-            ModeManager.playList = EMSList_3[Random.Range(0, 10)];
+            ModeManager.PlayList = EMSList_3[Random.Range(0, 10)];
         }
-        else if (ModeManager.currentMode == ModeManager.GameMode.Bestof5)
+        else if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.BestOf5)
         {
-            ModeManager.playList = EMSList[Random.Range(0, 10)];
+            ModeManager.PlayList = EMSList[Random.Range(0, 10)];
         }
-        else if (ModeManager.currentMode == ModeManager.GameMode.FreePlay)
+        else if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.FreePlay)
         {
-            ModeManager.playList = string.Empty;
+            ModeManager.PlayList = string.Empty;
             for (int i = 0; i < 50; i++)
             {
-                ModeManager.playList += Random.Range(0, 3).ToString();
+                ModeManager.PlayList += Random.Range(0, 3).ToString();
             }
         }
-        else if (ModeManager.currentMode == ModeManager.GameMode.Walk)
+        else if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.Walk)
         {
             for (int i = 0; i < 50; i++)
             {
-                ModeManager.playList += Random.Range(0, 3).ToString();
+                ModeManager.PlayList += Random.Range(0, 3).ToString();
             }
         }
-        else if (ModeManager.currentMode == ModeManager.GameMode.InfiniteLoop)
+        else if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.InfiniteLoop)
         {
             for (int i = 0; i < 50; i++)
             {
-                ModeManager.playList += Random.Range(1, 4).ToString();
+                ModeManager.PlayList += Random.Range(1, 4).ToString();
             }
         }
 
         if (isHotHands)
         {
             string temp = string.Empty;
-            for (int i = 0; i < ModeManager.playList.Length; i++)
+            for (int i = 0; i < ModeManager.PlayList.Length; i++)
             {
                 temp += Random.Range(0f, 1f) > 0.5f ? "1" : "3";
             }
-            ModeManager.playList = temp;
+            ModeManager.PlayList = temp;
         }
-        DataRecord.GenerateCSVFile(GameManager.playerName + "_ScreenTime_" + GameManager.filePrefix, ",Array: " + ModeManager.playList + "," + Time.time);
-        print("Array: " + ModeManager.playList);
+        DataRecord.GenerateCSVFile(GameManager.PlayerName + "_ScreenTime_" + GameManager.FilePrefix, ",Array: " + ModeManager.PlayList + "," + Time.time);
+        print("Array: " + ModeManager.PlayList);
     }
 }

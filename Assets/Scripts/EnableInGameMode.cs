@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class EnableInGameMode : MonoBehaviour
@@ -11,7 +12,7 @@ public class EnableInGameMode : MonoBehaviour
         bool canEnable = false;
         foreach (var mode in Modes)
         {
-            if (GameManager.currentMode == mode)
+            if (GameManager.CurrentMode.GameMode == mode)
                 canEnable = true;
         }
         gameObject.SetActive(canEnable);

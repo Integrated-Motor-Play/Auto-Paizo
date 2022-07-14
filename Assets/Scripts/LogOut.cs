@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ public class LogOut : MonoBehaviour
     public void OnLogOutButtonClicked()
     {
         PlayerPrefs.SetString("PlayerName", string.Empty);
-        if (GameManager.networkMode == GameManager.NetworkMode.online)
+        if (GameManager.networkMode == GameManager.NetworkMode.Online)
         {
             PhotonNetwork.Disconnect();
             Destroy(FindObjectOfType<PlayerManager>().gameObject);

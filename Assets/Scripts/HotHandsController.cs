@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 
-public class HotHandsController : MonoBehaviour
+public class HotHandsController : GameController
 {
     public GameObject GameOverPanel, AddPointPanel;
     public Slider sensSlider;
@@ -54,7 +55,7 @@ public class HotHandsController : MonoBehaviour
 
     private void SetWalkPrecount()
     {
-        if (ModeManager.currentMode == ModeManager.GameMode.Walk)
+        if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.Walk)
         {
             var numbers = new int[3] { 2, 5, 8 };
             var randomIndex = Random.Range(0, 3);
@@ -100,14 +101,14 @@ public class HotHandsController : MonoBehaviour
         float acc = Input.acceleration.magnitude;
         if (Mathf.Abs(acc - 1) >= accRange && !triggered && !isStop)
         {
-            if (listIndex < ModeManager.playList.Length)
+            if (listIndex < ModeManager.PlayList.Length)
             {
-                audioSource.clip = (listIndex == ModeManager.playList.Length - 1) ? start : start0;
+                audioSource.clip = (listIndex == ModeManager.PlayList.Length - 1) ? start : start0;
                 audioSource.Play();
-                CalibrationController.SendBluetoothData(GetChar(ModeManager.playList[listIndex], true));
+                CalibrationController.SendBluetoothData(GetChar(ModeManager.PlayList[listIndex], true));
                 Invoke(nameof(EMSOff), EMSTime);
                 SetWalkPrecount();
-                if (ModeManager.currentMode == ModeManager.GameMode.InfiniteLoop)
+                if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.InfiniteLoop)
                 {
                     StartCoroutine(InfiniteLoop());
                 }
@@ -133,11 +134,11 @@ public class HotHandsController : MonoBehaviour
 
     public bool CheckGameOver()
     {
-        if (listIndex >= ModeManager.playList.Length)
+        if (listIndex >= ModeManager.PlayList.Length)
             return true;
-        print(ScoreManager.Instance.EMSPanel.score + 1 + " : " + ModeManager.playList.Length);
-        if (ScoreManager.Instance.EMSPanel.score + 1 > ModeManager.playList.Length * 0.5f ||
-        ScoreManager.Instance.PlayerPanel.score + 1 > ModeManager.playList.Length * 0.5f)
+        print(ScoreManager.Instance.EMSPanel.score + 1 + " : " + ModeManager.PlayList.Length);
+        if (ScoreManager.Instance.EMSPanel.score + 1 > ModeManager.PlayList.Length * 0.5f ||
+        ScoreManager.Instance.PlayerPanel.score + 1 > ModeManager.PlayList.Length * 0.5f)
             return true;
         return false;
     }
@@ -145,7 +146,7 @@ public class HotHandsController : MonoBehaviour
     private void EMSOff()
     {
         if (listIndex > 0)
-            CalibrationController.SendBluetoothData(GetChar(ModeManager.playList[listIndex - 1], false));
+            CalibrationController.SendBluetoothData(GetChar(ModeManager.PlayList[listIndex - 1], false));
         triggered = false;
         accText.text = "";
     }
@@ -163,7 +164,7 @@ public class HotHandsController : MonoBehaviour
             dOn = false;
             return "d";
         }
-        if (GameManager.currentMode == GameManager.GameMode.OddsAndEvens && on)
+        if (GameManager.CurrentMode.GameMode == GameManager.GameMode.Numbers && on)
         {
             float chance = Random.Range(0f, 1f);
             print(chance + " in 0.25");
@@ -222,9 +223,9 @@ public class HotHandsController : MonoBehaviour
 
     private void SetEMSResultText()
     {
-        if (GameManager.currentMode == GameManager.GameMode.RockPaperScissors)
+        if (GameManager.CurrentMode.GameMode == GameManager.GameMode.Elements)
         {
-            switch (ModeManager.playList[listIndex])
+            switch (ModeManager.PlayList[listIndex])
             {
                 case '0':
                     EMSResultText.text = "Water";
@@ -240,14 +241,14 @@ public class HotHandsController : MonoBehaviour
             }
         }
 
-        if (GameManager.currentMode == GameManager.GameMode.OddsAndEvens)
+        if (GameManager.CurrentMode.GameMode == GameManager.GameMode.Numbers)
         {
             if (dOn)
             {
                 EMSResultText.text = "0";
                 return;
             }
-            switch (ModeManager.playList[listIndex])
+            switch (ModeManager.PlayList[listIndex])
             {
                 case '0':
                     EMSResultText.text = "5";
@@ -269,17 +270,17 @@ public class HotHandsController : MonoBehaviour
         int thisPlay = 0;
         while (true)
         {
-            GameManager.SendBluetoothData(GetChar(ModeManager.playList[thisPlay], true));
+            GameManager.SendBluetoothData(GetChar(ModeManager.PlayList[thisPlay], true));
             if (thisPlay > 0)
             {
-                var dataOff = GetChar(ModeManager.playList[thisPlay - 1], false);
+                var dataOff = GetChar(ModeManager.PlayList[thisPlay - 1], false);
                 CalibrationController.SendBluetoothData(dataOff);
                 print("Sended Network Bluetooth Message: " + dataOff);
             }
             thisPlay++;
             yield return new WaitForSeconds(4);
-            GameManager.SendBluetoothData(GetChar(ModeManager.playList[thisPlay - 1], false));
-            var dataOn = GetChar(ModeManager.playList[thisPlay], true);
+            GameManager.SendBluetoothData(GetChar(ModeManager.PlayList[thisPlay - 1], false));
+            var dataOn = GetChar(ModeManager.PlayList[thisPlay], true);
             CalibrationController.SendBluetoothData(dataOn);
             print("Sended Network Bluetooth Message: " + dataOn);
             thisPlay++;

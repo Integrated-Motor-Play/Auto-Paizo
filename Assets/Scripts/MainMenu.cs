@@ -1,3 +1,4 @@
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,12 +10,12 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.SystemSetting;
-        titleText.text = string.Format("Hello {0},", GameManager.playerName);
+        titleText.text = $"Hello {GameManager.PlayerName},";
     }
 
     public void LoadScene(int index)
     {
-        GameManager.currentMode = (GameManager.GameMode)index;
+        GameManager.CurrentMode.GameMode = (GameManager.GameMode)index;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

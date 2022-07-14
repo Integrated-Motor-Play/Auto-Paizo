@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -8,6 +9,6 @@ public class ImagePlayer : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        GetComponent<Image>().sprite = images[(int)GameManager.currentMode];
+        GetComponent<Image>().sprite = images[(int)GameManager.CurrentMode.GameMode];
     }
 }
