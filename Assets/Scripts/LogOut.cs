@@ -10,7 +10,7 @@ public class LogOut : MonoBehaviour
     public void OnLogOutButtonClicked()
     {
         PlayerPrefs.SetString("PlayerName", string.Empty);
-        if (GameManager.networkMode == GameManager.NetworkMode.Online)
+        if (GameManager.Current.Network == GameManager.NetworkMode.Online)
         {
             PhotonNetwork.Disconnect();
             Destroy(FindObjectOfType<PlayerManager>().gameObject);

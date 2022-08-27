@@ -44,12 +44,12 @@ public class NetworkLauncher : MonoBehaviourPunCallbacks
 
     public void SetOffline()
     {
-        GameManager.networkMode = GameManager.NetworkMode.Offline;
+        GameManager.Current.Network = GameManager.NetworkMode.Offline;
     }
 
     public void Connect()
     {
-        GameManager.networkMode = GameManager.NetworkMode.Online;
+        GameManager.Current.Network = GameManager.NetworkMode.Online;
         ConnectMessage.text = "Connecting...";
         // #Critical, we must first and foremost connect to Photon Online Server.
         PhotonNetwork.ConnectUsingSettings();

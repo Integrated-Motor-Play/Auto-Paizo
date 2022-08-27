@@ -105,7 +105,7 @@ public class HotHandsController : GameController
             {
                 audioSource.clip = (listIndex == ModeManager.PlayList.Length - 1) ? start : start0;
                 audioSource.Play();
-                CalibrationController.SendBluetoothData(GetChar(ModeManager.PlayList[listIndex], true));
+                CalibrationController.SendLocalBluetoothData(GetChar(ModeManager.PlayList[listIndex], true));
                 Invoke(nameof(EMSOff), EMSTime);
                 SetWalkPrecount();
                 if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.InfiniteLoop)
@@ -146,7 +146,7 @@ public class HotHandsController : GameController
     private void EMSOff()
     {
         if (listIndex > 0)
-            CalibrationController.SendBluetoothData(GetChar(ModeManager.PlayList[listIndex - 1], false));
+            CalibrationController.SendLocalBluetoothData(GetChar(ModeManager.PlayList[listIndex - 1], false));
         triggered = false;
         accText.text = "";
     }
@@ -164,7 +164,7 @@ public class HotHandsController : GameController
             dOn = false;
             return "d";
         }
-        if (GameManager.CurrentMode.GameMode == GameManager.GameMode.Numbers && on)
+        if (GameManager.Current.Game == GameManager.Game.Numbers && on)
         {
             float chance = Random.Range(0f, 1f);
             print(chance + " in 0.25");
@@ -191,9 +191,9 @@ public class HotHandsController : GameController
 
     private IEnumerator PreMove(float time)
     {
-        CalibrationController.SendBluetoothData("D");
+        CalibrationController.SendLocalBluetoothData("D");
         yield return new WaitForSeconds(time);
-        CalibrationController.SendBluetoothData("d");
+        CalibrationController.SendLocalBluetoothData("d");
     }
 
     private void EnableGamePanel()
@@ -218,12 +218,12 @@ public class HotHandsController : GameController
 
     private void OnDisable()
     {
-        CalibrationController.SendBluetoothData("r");
+        CalibrationController.SendLocalBluetoothData("r");
     }
 
     private void SetEMSResultText()
     {
-        if (GameManager.CurrentMode.GameMode == GameManager.GameMode.Elements)
+        if (GameManager.Current.Game == GameManager.Game.Elements)
         {
             switch (ModeManager.PlayList[listIndex])
             {
@@ -241,7 +241,7 @@ public class HotHandsController : GameController
             }
         }
 
-        if (GameManager.CurrentMode.GameMode == GameManager.GameMode.Numbers)
+        if (GameManager.Current.Game == GameManager.Game.Numbers)
         {
             if (dOn)
             {
@@ -274,14 +274,14 @@ public class HotHandsController : GameController
             if (thisPlay > 0)
             {
                 var dataOff = GetChar(ModeManager.PlayList[thisPlay - 1], false);
-                CalibrationController.SendBluetoothData(dataOff);
+                CalibrationController.SendLocalBluetoothData(dataOff);
                 print("Sended Network Bluetooth Message: " + dataOff);
             }
             thisPlay++;
             yield return new WaitForSeconds(4);
             GameManager.SendBluetoothData(GetChar(ModeManager.PlayList[thisPlay - 1], false));
             var dataOn = GetChar(ModeManager.PlayList[thisPlay], true);
-            CalibrationController.SendBluetoothData(dataOn);
+            CalibrationController.SendLocalBluetoothData(dataOn);
             print("Sended Network Bluetooth Message: " + dataOn);
             thisPlay++;
             yield return new WaitForSeconds(4);

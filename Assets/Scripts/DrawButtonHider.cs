@@ -7,7 +7,7 @@ public class DrawButtonHider : MonoBehaviour
 {
     private void OnEnable()
     {
-        if (GameManager.CurrentMode.GameMode != GameManager.GameMode.Elements)
+        if (GameManager.Current.Game != GameManager.Game.Elements)
         {
             gameObject.SetActive(false);
         }

@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class EnableInGameMode : MonoBehaviour
 {
-    public GameManager.GameMode[] Modes;
+    public GameManager.Game[] Modes;
 
     private void Awake()
     {
         bool canEnable = false;
         foreach (var mode in Modes)
         {
-            if (GameManager.CurrentMode.GameMode == mode)
+            if (GameManager.Current.Game == mode)
                 canEnable = true;
         }
         gameObject.SetActive(canEnable);

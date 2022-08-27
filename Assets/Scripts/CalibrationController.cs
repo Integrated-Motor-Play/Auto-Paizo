@@ -1,28 +1,40 @@
+using System;
 using Managers;
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class CalibrationController : MonoBehaviour
 {
+    private BluetoothConnector _connector;
     public Toggle[] toggles;
+    public TextMeshProUGUI deviceTitle;
 
-    public void IndexFinger(bool on)
+    public void SetupCalibration(BluetoothConnector connector, string deviceName)
     {
-        if (on) { SendBluetoothData("A"); }
-        else { SendBluetoothData("a"); }
+        _connector = connector;
+        deviceTitle.text = deviceName;
     }
 
-    public void MiddleFinger(bool on)
+    public void Channel1(bool on)
     {
-        if (on) { SendBluetoothData("C"); }
-        else { SendBluetoothData("c"); }
+        SendBluetoothData(on ? "A" : "a");
     }
 
-    public void RingFinger(bool on)
+    public void Channel2(bool on)
     {
-        if (on) { SendBluetoothData("D"); }
-        else { SendBluetoothData("d"); }
+        SendBluetoothData(on ? "B" : "b");
+    }
+
+    public void Channel3(bool on)
+    {
+        SendBluetoothData(on ? "C" : "c");
+    }
+    
+    public void Channel4(bool on)
+    {
+        SendBluetoothData(on ? "D" : "d");
     }
 
     private void ResetAll()
@@ -39,9 +51,9 @@ public class CalibrationController : MonoBehaviour
         ResetAll();
     }
 
-    public static void SendBluetoothData(string data)
+    public static void SendLocalBluetoothData(string data)
     {
-        if (GameManager.networkMode == GameManager.NetworkMode.Online)
+        if (GameManager.Current.Network == GameManager.NetworkMode.Online)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
                 GameManager.Instance.SendBluetoothDataToPlayer(GameManager.ControledPlayer, data);
@@ -53,6 +65,12 @@ public class CalibrationController : MonoBehaviour
         {
             GameManager.SendBluetoothData(data);
         }
+    }
+    
+    private void SendBluetoothData(string data)
+    {
+        if(_connector != null)
+            _connector.SendBluetoothData(data);
     }
 }
 

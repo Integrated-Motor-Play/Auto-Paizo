@@ -11,8 +11,8 @@ public class ChooseDevice : MonoBehaviour
     
     public void OnDropdownSelect(int value)
     {
-        GameManager.CurrentDevice = (GameManager.Device)value;
-        print("Set Device to: " + GameManager.CurrentDevice);
+        GameManager.Current.Device = (GameManager.Device)value;
+        print("Set Device to: " + GameManager.Current.Device);
         deviceImage.sprite = value switch
         {
             0 => seeeduino,

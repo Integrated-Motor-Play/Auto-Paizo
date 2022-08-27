@@ -10,8 +10,8 @@ public class EMSGenerator : MonoBehaviour
     private string[] EMSList_3;
     private void Awake()
     {
-        isHotHands = GameManager.CurrentMode.GameMode == GameManager.GameMode.SlapMeIfYouCan;
-        print("Mode: " + GameManager.CurrentMode.ModeName);
+        isHotHands = GameManager.Current.Game == GameManager.Game.SlapMeIfYouCan;
+        print("Mode: " + GameManager.Current.GameName);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         EMSList_3 = new string[EMSList.Length];
         for (int i = 0; i < EMSList.Length; i++)

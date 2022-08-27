@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2516433870687089382}
   - component: {fileID: 2516433870687089381}
   - component: {fileID: 9207645519691061512}
-  - component: {fileID: 7357856769270528281}
+  - component: {fileID: 8820524208963295511}
   m_Layer: 5
   m_Name: Best of 3
   m_TagString: Untagged
@@ -285,12 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMode: 0
   buttonText: {fileID: 2516433869696586859}
-  slapMeIfYouCan: 0
-  numbers: 0
-  elements: 0
-  blackJack: 0
-  trangularMatch: 0
---- !u!114 &7357856769270528281
+  acceptedGames: 
+--- !u!114 &8820524208963295511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,6 +295,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2516433870687089379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40efc0236b8e34446a44e163b39bca63, type: 3}
+  m_Script: {fileID: 11500000, guid: 485a89a39a1d4f140985f6927bb99fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

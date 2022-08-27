@@ -7,7 +7,7 @@ public class OnlineOnly : MonoBehaviour
 {
     private void Awake()
     {
-        if (GameManager.networkMode == GameManager.NetworkMode.Offline)
+        if (GameManager.Current.Network == GameManager.NetworkMode.Offline)
             Destroy(gameObject);
     }
 }

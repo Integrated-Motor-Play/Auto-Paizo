@@ -6,12 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Login 1.unity
+    path: Assets/Scenes/Refactor/Login 1.unity
     guid: b6202fcb6333a0a49b96ebbd57f99634
   - enabled: 1
-    path: Assets/Scenes/MainMenu 1.unity
+    path: Assets/Scenes/Refactor/BluetoothConnect SinglePlayer.unity
+    guid: 7f760e31f97e6de45ba04bc0abf9bbb8
+  - enabled: 1
+    path: Assets/Scenes/Refactor/MainMenu.unity
     guid: 8dcfd8d8fc8b20749864d134430c2b1e
   - enabled: 1
-    path: Assets/Scenes/GamePlay 1.unity
+    path: Assets/Scenes/Refactor/RoundSelection SinglePlayer.unity
+    guid: 1361f06c9871bd940b3bc27f78d89b95
+  - enabled: 1
+    path: Assets/Scenes/Refactor/RoundSelection Computer.unity
     guid: 17bea02cf9c7d7d448d09507bccf0982
+  - enabled: 1
+    path: Assets/Scenes/Refactor/GamePlay Computer.unity
+    guid: ea0506f2764288442ba7236768c9873a
+  - enabled: 1
+    path: Assets/Scenes/Refactor/RoundSelection Social.unity
+    guid: a4405e2d60ce60d419b0254dc57a69b8
   m_configObjects: {}

@@ -1,14 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using ArduinoBluetoothAPI;
+using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HomeButton : MonoBehaviour
 {
-    public void OnButtonClick()
+    public void GoToScene(int index)
     {
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        CalibrationController.SendBluetoothData("r");
+        SceneManager.LoadScene(index);
+    }
+
+    public void TurnOffEMS()
+    {
+        if(GameManager.Current.Mode == GameManager.Mode.SinglePlayer)
+            CalibrationController.SendLocalBluetoothData("r");
+    }
+
+    public void DisconnectBluetooth()
+    {
+        if(GameManager.Current.Mode == GameManager.Mode.SinglePlayer)
+            Destroy(BluetoothManager.Instance.gameObject);
     }
 }

@@ -7,41 +7,23 @@ using UnityEngine;
 
 public class ModeButtonController : MonoBehaviour
 {
-    public ModeManager.RoundMode currentMode;
+    public GameManager.Round currentMode;
     public TextMeshProUGUI buttonText;
-    public bool slapMeIfYouCan, numbers, elements, blackJack, trangularMatch;
+    public List<GameManager.Game> acceptedGames;
 
     private void Awake()
     {
-        switch (GameManager.CurrentMode.GameMode)
+        if (!acceptedGames.Contains(GameManager.Current.Game))
         {
-            case GameManager.GameMode.SlapMeIfYouCan:
-                if(!slapMeIfYouCan) Destroy(gameObject);
-                break;
-            case GameManager.GameMode.Numbers:
-                if(!numbers) Destroy(gameObject);
-                break;
-            case GameManager.GameMode.Elements:
-                if(!elements) Destroy(gameObject);
-                break;
-            case GameManager.GameMode.TwentyOne:
-                break;
-            case GameManager.GameMode.BlackJack:
-                if(!blackJack) Destroy(gameObject);
-                break;
-            case GameManager.GameMode.TriangularMatch:
-                if(!trangularMatch) Destroy(gameObject);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            Destroy(gameObject);
         }
     }
 
     public void SwitchMode()
     {
-        ModeManager.CurrentMode.RoundMode = currentMode;
-        buttonText.text = ModeManager.CurrentMode.ModeName;
-        gameObject.name = ModeManager.CurrentMode.ModeName;
+        GameManager.Current.Round = currentMode;
+        buttonText.text = GameManager.Current.RoundName;
+        gameObject.name = GameManager.Current.RoundName;
     }
 
     private void OnValidate()

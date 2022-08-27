@@ -8,18 +8,24 @@ using TMPro;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextPlayer : MonoBehaviour
 {
+    public string prefix;
+    public string suffix;
     public enum textType
     {
         Game,
         Round,
+        Mode,
     }
     public textType TextType;
 
     private void Update()
     {
-        if (TextType == textType.Game)
-            GetComponent<TextMeshProUGUI>().text = GameManager.CurrentMode.ModeName;
-        if (TextType == textType.Round)
-            GetComponent<TextMeshProUGUI>().text = ModeManager.CurrentMode.ModeName;
+        GetComponent<TextMeshProUGUI>().text = TextType switch
+        {
+            textType.Game => prefix + GameManager.Current.GameName + suffix,
+            textType.Round => prefix + GameManager.Current.RoundName + suffix,
+            textType.Mode => prefix + GameManager.Current.ModeName + suffix,
+            _ => GetComponent<TextMeshProUGUI>().text
+        };
     }
 }

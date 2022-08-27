@@ -1,4 +1,5 @@
 using System;
+using General;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -19,18 +20,38 @@ namespace Login
             UpdateTitleText(GameManager.PlayerName);
         }
 
-        public void OnClickStart()
+        public void OnClickStartSinglePlayer()
+        {
+            SetUp();
+            GameManager.Current.Mode = GameManager.Mode.SinglePlayer;
+            SceneManager.LoadScene(SceneName.BLUETOOTH_SINGLE);
+        }
+        
+        public void OnClickStartSocial()
+        {
+            SetUp();
+            GameManager.Current.Mode = GameManager.Mode.Social;
+            SceneManager.LoadScene(SceneName.MAIN_MENU);
+        }
+        
+        public void OnClickStartComputer()
+        {
+            SetUp();
+            GameManager.Current.Mode = GameManager.Mode.Computer;
+            SceneManager.LoadScene(SceneName.MAIN_MENU);
+        }
+
+        private void SetUp()
         {
             PlayerPrefs.SetString("PlayerName", nameField.text);
             GameManager.PlayerName = nameField.text;
             DataRecord.GenerateCSVFile(GameManager.PlayerName + "_ScreenTime_" + GameManager.FilePrefix, "Panel,Time");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         public void UpdateTitleText(string playerName)
         {
             if (playerName.IsNullOrEmpty())
-                title.text = "Welcome to Auto-Paizo!";
+                title.text = "Welcome to EMS Games!";
             else
                 title.text = "Hi " + playerName + "!";
         }

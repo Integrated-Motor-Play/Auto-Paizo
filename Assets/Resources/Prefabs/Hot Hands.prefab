@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.3941203}
   m_AnchorMax: {x: 1, y: 0.62100005}
-  m_AnchoredPosition: {x: 0, y: -3.2346592}
+  m_AnchoredPosition: {x: 0, y: -3.234665}
   m_SizeDelta: {x: -59.4067, y: 141.0801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1434018368
@@ -301,6 +301,8 @@ GameObject:
   - component: {fileID: 7716686140274972574}
   - component: {fileID: 7716686140274972575}
   - component: {fileID: 7716686140274972572}
+  - component: {fileID: 7716686140198654365}
+  - component: {fileID: 447603829287824371}
   m_Layer: 5
   m_Name: Hot Hands
   m_TagString: Untagged
@@ -451,3 +453,31 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &7716686140198654365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716686140274972569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5484cf5eb7fc102449d467a915b64b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  distance: 0.5
+  time: 0.3
+  ease: 27
+--- !u!114 &447603829287824371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716686140274972569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485a89a39a1d4f140985f6927bb99fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

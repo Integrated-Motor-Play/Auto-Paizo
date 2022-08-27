@@ -82,7 +82,7 @@ namespace Managers
         {
             _isConnecting = false;
 
-            if (GameManager.CurrentDevice == GameManager.Device.Seeeduino)
+            if (GameManager.Current.Device == GameManager.Device.Seeeduino)
             {
                 var service = new BluetoothHelperService("19B10000-E8F2-537E-4F6C-D104768A1214");
                 _characteristic = new BluetoothHelperCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214");
@@ -109,7 +109,7 @@ namespace Managers
 
         private static void SendDataToDevice(string d)
         {
-            if (GameManager.CurrentDevice == GameManager.Device.Seeeduino)
+            if (GameManager.Current.Device == GameManager.Device.Seeeduino)
                 _helper.WriteCharacteristic(_instance._characteristic, d);
             else
                 _helper.SendData(d);
