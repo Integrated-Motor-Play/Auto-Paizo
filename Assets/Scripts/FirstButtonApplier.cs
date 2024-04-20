@@ -12,7 +12,7 @@ public class FirstButtonApplier : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Current.Round = SetSelectedObject().GetComponent<ModeButtonController>().currentMode;
+        //GameManager.Current.Round = SetSelectedObject().GetComponent<ModeButtonController>().currentMode;
     }
 
     private void Update()

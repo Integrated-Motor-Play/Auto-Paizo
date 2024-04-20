@@ -8,18 +8,20 @@ public class ConsoleToGUI : MonoBehaviour
     public TextMeshProUGUI debugLog;
     string myLog = "*begin log";
     string filename = "";
-    bool doShow = true;
-    int kChars = 700;
+    int kChars = 3000;
     void OnEnable() { Application.logMessageReceived += Log; }
     void OnDisable() { Application.logMessageReceived -= Log; }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) { doShow = !doShow; }
-        debugLog.gameObject.SetActive(doShow);
-
         debugLog.text = myLog;
     }
+
+    public void SetDebugPanelShown(bool show)
+    {
+        debugLog.gameObject.SetActive(show);
+    }
+    
     public void Log(string logString, string stackTrace, LogType type)
     {
         // for onscreen...

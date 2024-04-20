@@ -42,6 +42,7 @@ public class EmsSoundButton : MonoBehaviour
         currentState = state;
 
         var obj = UpdateIconAndText();
+        if (obj == null) return;
         var connectors = FindObjectsOfType<BluetoothConnector>();
         foreach (var connector in connectors)
         {
@@ -57,6 +58,11 @@ public class EmsSoundButton : MonoBehaviour
     private Sound UpdateIconAndText()
     {
         var stateObj = soundStates.ToList().Find(s => s.state == currentState);
+        if (stateObj == null)
+        {
+            SwitchState(currentState.Next());
+            return null;
+        }
         label.text = stateObj.name;
         icon.sprite = stateObj.icon;
         return stateObj;

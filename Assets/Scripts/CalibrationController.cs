@@ -7,13 +7,13 @@ using TMPro;
 
 public class CalibrationController : MonoBehaviour
 {
-    private BluetoothConnector _connector;
+    public BluetoothConnector connector;
     public Toggle[] toggles;
     public TextMeshProUGUI deviceTitle;
 
     public void SetupCalibration(BluetoothConnector connector, string deviceName)
     {
-        _connector = connector;
+        this.connector = connector;
         deviceTitle.text = deviceName;
     }
 
@@ -69,8 +69,10 @@ public class CalibrationController : MonoBehaviour
     
     private void SendBluetoothData(string data)
     {
-        if(_connector != null)
-            _connector.SendBluetoothData(data);
+        if (connector != null)
+            connector.SendBluetoothData(data);
+        else if(BluetoothManager.Instance != null)
+            BluetoothManager.SendBluetoothData(data);
     }
 }
 

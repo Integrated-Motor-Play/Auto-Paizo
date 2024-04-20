@@ -5,6 +5,7 @@ using System.Linq;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class EMSConnectCell : MonoBehaviour
@@ -18,6 +19,8 @@ public class EMSConnectCell : MonoBehaviour
     public TextMeshProUGUI deviceTitle;
     public BluetoothConnector connector;
     public GameObject beforeConnectPanel, afterConnectPanel;
+    public UnityEvent OnConnected;
+    
     private string _title;
     private string _defaultName;
 
@@ -82,7 +85,7 @@ public class EMSConnectCell : MonoBehaviour
     public void SetConnected(bool isConnected)
     {
         Connected = isConnected;
-        ConnectDevicePanel.Instance.playButtonHover.TryToRevealButton();
+        OnConnected.Invoke();
     }
     
     private void OnDestroy()

@@ -83,11 +83,11 @@ public class ElementsComputer:GamePlay
             yield return ActuatePlayer(_playerRightHand, i);
             if (_playerLeftHand.Info.Element.BeatElements.Contains(_playerRightHand.Info.Element.Element))
             {
-                scoreBoard.LeftGetsPoint($"<b>{_playerLeftHand.Info.Element.Element}</b> Beats <b>{_playerRightHand.Info.Element.Element}</b>!");
+                scoreBoard.LeftGetsPoint($"<b>{_playerLeftHand.Info.Element.Element}</b> beats <b>{_playerRightHand.Info.Element.Element}</b>!");
             }
             else if (_playerRightHand.Info.Element.BeatElements.Contains(_playerLeftHand.Info.Element.Element))
             {
-                scoreBoard.RightGetsPoint($"<b>{_playerRightHand.Info.Element.Element}</b> Beats <b>{_playerLeftHand.Info.Element.Element}</b>!");
+                scoreBoard.RightGetsPoint($"<b>{_playerLeftHand.Info.Element.Element}</b> loses to <b>{_playerRightHand.Info.Element.Element}</b>!");
             }
             else 
             {

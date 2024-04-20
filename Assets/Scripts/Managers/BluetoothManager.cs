@@ -94,7 +94,7 @@ namespace Managers
                 helper.StartListening();
             }
 
-            SendBluetoothData("r");
+            //SendBluetoothData("r");
         }
     
 
@@ -186,6 +186,11 @@ namespace Managers
         }
 
         void OnDestroy()
+        {
+            Disconnect();
+        }
+        
+        public void Disconnect()
         {
             _helper?.Disconnect();
         }

@@ -10,7 +10,6 @@ public class GamePlayPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         switch (GameManager.Current.Game)
         {
             case GameManager.Game.Elements:
@@ -46,10 +45,5 @@ public class GamePlayPanel : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-    }
-
-    private void OnDisable()
-    {
-        Screen.sleepTimeout = SleepTimeout.SystemSetting;
     }
 }

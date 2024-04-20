@@ -1,5 +1,6 @@
 using DG.Tweening;
 using General;
+using Managers;
 using UISystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,7 +32,13 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.UnloadSceneAsync(SceneName.GAMEPLAY_COMPUTER);
+        var scene = GameManager.Current.Mode switch
+        {
+            GameManager.Mode.Social => SceneName.GAMEPLAY_SOCIAL,
+            GameManager.Mode.Computer => SceneName.GAMEPLAY_COMPUTER,
+            _ => "Not Found"
+        };
+        SceneManager.UnloadSceneAsync(scene);
         //SceneManager.LoadScene(SceneName.GAMEPLAY_COMPUTER, LoadSceneMode.Additive);
     }
 

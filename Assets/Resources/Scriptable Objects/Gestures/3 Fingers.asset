@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889488bab648469da9152ee55399e486, type: 3}
   m_Name: 3 Fingers
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 482df8551c030b04b84e5e3544f0d858, type: 3}
   gestureName: 3 Fingers
   channel: 1
-  icon: {fileID: 21300000, guid: 482df8551c030b04b84e5e3544f0d858, type: 3}

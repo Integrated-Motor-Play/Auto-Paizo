@@ -21,6 +21,11 @@ public class HomeButton : MonoBehaviour
     public void DisconnectBluetooth()
     {
         if(GameManager.Current.Mode == GameManager.Mode.SinglePlayer)
+            BluetoothManager.Instance.Disconnect();
+        var synchronizer = FindObjectOfType<Synchronizer>();
+        if( synchronizer != null)
+            Destroy(synchronizer.gameObject);
+        if(GameManager.Current.Mode == GameManager.Mode.SinglePlayer)
             Destroy(BluetoothManager.Instance.gameObject);
     }
 }

@@ -50,4 +50,17 @@ public class DataRecord : MonoBehaviour
         }
 
     }
+    
+    
+    public static T LoadJsonFromFile<T>(string fileName) where T : class
+    {
+        string path = Path.Combine(Application.persistentDataPath, fileName + ".json");
+        if (File.Exists(path)) //如果文件夹存在
+        {
+            T data = JsonUtility.FromJson<T>(File.ReadAllText(path));
+            return data;
+        }
+        print("File does not exist at: " + path);
+        return null;
+    }
 }

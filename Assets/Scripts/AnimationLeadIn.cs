@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing.Printing;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class AnimationLeadIn : MonoBehaviour
 {
+    [EnumToggleButtons]
     public Direction direction;
     public float distance;
     public float time = 0.3f;
+    [EnumPaging]
     public Ease ease = Ease.OutBack;
 
     public enum Direction

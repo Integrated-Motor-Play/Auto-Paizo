@@ -6,20 +6,32 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayButtonHover : MonoBehaviour
+public class ButtonHover : MonoBehaviour
 {
     private Image _image;
     public float fadeTime = 0.5f;
+    public bool canReveal = true;
 
+    private EMSConnectCell[] _cells;
+    
     private void Awake()
     {
         _image = GetComponent<Image>();
+        var parent = FindObjectOfType<CellParent>();
+        if (parent == null) return;
+        _cells = parent.GetComponentsInChildren<EMSConnectCell>();
+        foreach (var cell in _cells)
+        {
+            cell.OnConnected.AddListener(TryToRevealButton);
+        }
     }
 
-    private static bool CheckPlayButton()
+    private bool CheckPlayButton()
     {
         var parent = FindObjectOfType<CellParent>();
-        return parent != null && parent.GetComponentsInChildren<EMSConnectCell>().All(cell => cell.Connected);
+        return parent != null 
+               && parent.GetComponentsInChildren<EMSConnectCell>().All(cell => cell.Connected)
+               && canReveal;
     }
 
     public void TryToRevealButton()

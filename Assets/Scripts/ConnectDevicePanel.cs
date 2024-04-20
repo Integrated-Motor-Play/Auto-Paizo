@@ -12,10 +12,9 @@ public class ConnectDevicePanel : MonoBehaviour
     public static ConnectDevicePanel Instance;
     public DeviceDetailPanel deviceDetailPanel;
     public CalibrationController calibrationPanel;
-    public PlayButtonHover playButtonHover;
     public GameObject p1H2, p2H4;
     public GameManager.Game[] p1H2Games, p2H4Games;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -27,10 +26,5 @@ public class ConnectDevicePanel : MonoBehaviour
             p1H2.SetActive(true);
         if(p2H4Games.Contains(GameManager.Current.Game))
             p2H4.SetActive(true);
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(SceneName.GAMEPLAY_COMPUTER, LoadSceneMode.Additive);
     }
 }

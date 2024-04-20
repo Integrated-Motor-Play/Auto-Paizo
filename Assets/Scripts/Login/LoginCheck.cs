@@ -40,6 +40,13 @@ namespace Login
             GameManager.Current.Mode = GameManager.Mode.Computer;
             SceneManager.LoadScene(SceneName.MAIN_MENU);
         }
+        
+        public void OnClickStartPlant()
+        {
+            SetUp();
+            GameManager.Current.Mode = GameManager.Mode.Plant;
+            SceneManager.LoadScene(SceneName.GAMEPLAY_PLANT);
+        }
 
         private void SetUp()
         {

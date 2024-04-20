@@ -22,15 +22,15 @@ public class EMSGenerator : MonoBehaviour
 
     public void UpdatePlayList()
     {
-        if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.BestOf3)
+        if (GameManager.Current.Round == GameManager.Round.BestOf3)
         {
             ModeManager.PlayList = EMSList_3[Random.Range(0, 10)];
         }
-        else if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.BestOf5)
+        else if (GameManager.Current.Round == GameManager.Round.BestOf5)
         {
             ModeManager.PlayList = EMSList[Random.Range(0, 10)];
         }
-        else if (ModeManager.CurrentMode.RoundMode == ModeManager.RoundMode.FreePlay)
+        else if (GameManager.Current.Round == GameManager.Round.FreePlay)
         {
             ModeManager.PlayList = string.Empty;
             for (int i = 0; i < 50; i++)

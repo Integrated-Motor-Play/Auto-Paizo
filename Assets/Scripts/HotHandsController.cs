@@ -248,6 +248,7 @@ public class HotHandsController : GameController
                 EMSResultText.text = "0";
                 return;
             }
+             print("Index: " + listIndex);
             switch (ModeManager.PlayList[listIndex])
             {
                 case '0':

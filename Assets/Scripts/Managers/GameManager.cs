@@ -44,7 +44,8 @@ namespace Managers
         {
             SinglePlayer,
             Social,
-            Computer
+            Computer,
+            Plant
         }
         
         public enum Round
@@ -78,7 +79,7 @@ namespace Managers
                         Game.BlackJack => "Epta",
                         Game.Match2Players => "ídio 2 Players",
                         Game.Match1Player => "ídio 1 Player",
-                        Game.ArmWrestling => "Arm Wrestling",
+                        Game.ArmWrestling => "Arm Spark",
                         _ => throw new ArgumentOutOfRangeException()
                     };
                     return name;
@@ -152,6 +153,7 @@ namespace Managers
             }
             Current = DefaultGaming;
             Initialized = true;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
         
 

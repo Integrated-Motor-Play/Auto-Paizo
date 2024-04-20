@@ -1,4 +1,4 @@
-repository "EMSPlayer@ssl://unity_1346779591@sh03-plasticscm.unity.cn:8787"
+repository "EMSPlayer@unity_1346779591@cloud.cn"
   path "/"
-    smartbranch "/main/CYZ" 
+    smartbranch "/main/CYZ" changeset "38"                 
      
