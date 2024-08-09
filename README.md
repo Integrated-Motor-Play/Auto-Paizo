@@ -1,7 +1,3 @@
-Based on the provided GitHub link, here's a customized README template for your project:
-
----
-
 # Auto-Paizo
 
 **[Auto-Paizo GitHub Repository](https://github.com/Integrated-Motor-Play/Auto-Paizo)**
